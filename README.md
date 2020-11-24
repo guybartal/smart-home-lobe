@@ -2,10 +2,14 @@
 smart home example based on lobe.ai image classification and shelly relays
 
 # setup
-```pip3 install -r requirements.txt
+```
+pip3 install -r requirements.txt
+```
 
 # run
-```python3 classifier.py
+```
+python3 classifier.py
+```
 
 # other options
 ```
