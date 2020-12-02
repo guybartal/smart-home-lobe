@@ -1,0 +1,16 @@
+pillow==7.2.0
+# TF Lite runtime packages based on OS and python version: https://www.tensorflow.org/lite/guide/python#install_just_the_tensorflow_lite_interpreter
+# windows
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp35-cp35m-win_amd64.whl; sys_platform == 'win32' and python_version == '3.5'
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-win_amd64.whl; sys_platform == 'win32' and python_version == '3.6'
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-win_amd64.whl; sys_platform == 'win32' and python_version == '3.7'
+# mac
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp35-cp35m-macosx_10_14_x86_64.whl; sys_platform == 'darwin' and python_version == '3.5'
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-macosx_10_14_x86_64.whl; sys_platform == 'darwin' and python_version == '3.6'
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-macosx_10_14_x86_64.whl; sys_platform == 'darwin' and python_version == '3.7'
+# linux
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp35-cp35m-linux_x86_64.whl; sys_platform == 'linux' and platform_machine == 'x86_64' and python_version == '3.5'
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp36-cp36m-linux_x86_64.whl; sys_platform == 'linux' and platform_machine == 'x86_64' and python_version == '3.6'
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_x86_64.whl; sys_platform == 'linux' and platform_machine == 'x86_64' and python_version == '3.7'
+https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp38-cp38-linux_x86_64.whl; sys_platform == 'linux' and platform_machine == 'x86_64' and python_version == '3.8'
+# for other linux/raspberry pi, please see the link above to find the right version for your OS
