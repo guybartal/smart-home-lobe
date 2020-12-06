@@ -1,2 +1,1 @@
-tensorflow==1.15.3
 pillow==7.2.0
