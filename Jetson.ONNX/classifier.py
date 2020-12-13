@@ -136,8 +136,8 @@ def arg_parse():
 if __name__ == "__main__":
     args = arg_parse()
     print("Loading Model")
-    model = Model(args.model_dir)
-    model.load()
+    model = Model()
+    model.load(args.model_dir)
 
     print("Starting Video Capture")  
     #for usb camera unmark this line and mark gstreamer
