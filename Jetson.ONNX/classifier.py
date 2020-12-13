@@ -14,9 +14,6 @@ import numpy as np
 import cv2
 import time
 
-
-MODEL_DIR = os.path.join(os.path.dirname(__file__), "..")  # default assume that our export is in this file's parent directory
-
 def gstreamer_pipeline(
     capture_width=1280,
     capture_height=720,
@@ -46,29 +43,15 @@ def gstreamer_pipeline(
 
 
 class Model(object):
-    def __init__(self, model_dir=MODEL_DIR):
-        # make sure our exported SavedModel folder exists
-        self.session = None
-        model_path = os.path.realpath(model_dir)
-        if not os.path.exists(model_path):
-            raise ValueError(f"Exported model folder doesn't exist {model_dir}")
-        self.model_path = model_path
-
-        # load our signature json file, this shows us the model inputs and outputs
-        # you should open this file and take a look at the inputs/outputs to see their data types, shapes, and names
-        with open(os.path.join(model_path, "signature.json"), "r") as f:
-            self.signature = json.load(f)
-        self.inputs = self.signature.get("inputs")
-        self.outputs = self.signature.get("outputs")
-
-        # placeholder for the tensorflow session
+    def __init__(self):
+        # placeholder for the onnx session
         self.session = None
 
     def load(self, model_dir):
         """Load the model from path to model file"""
         with open(os.path.join(model_dir, "../signature.json"), "r") as f:
             self.signature = json.load(f)
-        model_file = "../" + signature.get("filename")
+        model_file = "../" + self.signature.get("filename")
         if not os.path.isfile(model_file):
             raise FileNotFoundError(f"Model file does not exist")
 
