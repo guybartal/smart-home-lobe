@@ -152,6 +152,7 @@ if __name__ == "__main__":
 
         if (i%30==0):
             cv2.putText(image,str(outputs),(20,20), font, .5,(255,255,255),2,cv2.LINE_AA)
+            print (f'storing file {args.output_dir}/frame{i}.jpg')
             cv2.imwrite(f'{args.output_dir}/frame{i}.jpg',image)
         i+=1
         timeB= time.time()
