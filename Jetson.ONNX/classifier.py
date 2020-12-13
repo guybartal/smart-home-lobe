@@ -49,9 +49,9 @@ class Model(object):
 
     def load(self, model_dir):
         """Load the model from path to model file"""
-        with open(os.path.join(model_dir, "../signature.json"), "r") as f:
+        with open(os.path.join(model_dir, "/signature.json"), "r") as f:
             self.signature = json.load(f)
-        model_file = "../" + self.signature.get("filename")
+        model_file = "/" + self.signature.get("filename")
         if not os.path.isfile(model_file):
             raise FileNotFoundError(f"Model file does not exist")
 
