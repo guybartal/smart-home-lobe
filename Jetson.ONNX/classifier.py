@@ -48,6 +48,7 @@ def gstreamer_pipeline(
 class Model(object):
     def __init__(self, model_dir=MODEL_DIR):
         # make sure our exported SavedModel folder exists
+        self.session = None
         model_path = os.path.realpath(model_dir)
         if not os.path.exists(model_path):
             raise ValueError(f"Exported model folder doesn't exist {model_dir}")
