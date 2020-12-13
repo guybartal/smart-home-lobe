@@ -105,7 +105,7 @@ class Model(object):
         return results
 
 
-    def process_image((self, image, input_shape):
+    def process_image(self, image, input_shape):
         """
         Given a PIL Image, center square crop and resize to fit the expected model input, and convert from [0,255] to [0,1] values.
         """
