@@ -134,6 +134,7 @@ if __name__ == "__main__":
     model.load()
 
     print("Starting Video Capture")  
+    #unmark to capture USB camera
     #videoCapture = cv2.VideoCapture(0)
     print(gstreamer_pipeline(flip_method=0))
     videoCapture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
