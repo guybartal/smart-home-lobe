@@ -114,7 +114,7 @@ if __name__ == "__main__":
     print("Starting Video Capture")
     #unmark to capture USB camera
     #videoCapture = cv2.VideoCapture(0)
-    videoCapture = cv2.VideoCapture(args.rtsp, cv2.CAP_GSTREAMER)
+    videoCapture = cv2.VideoCapture(args.rtsp)
 
     i = 0
     font = cv2.FONT_HERSHEY_SIMPLEX
@@ -129,7 +129,7 @@ if __name__ == "__main__":
         print(f"Predicted: {outputs}")
         model.publish(outputs)
 
-        if (i%30==0):
+        if (i%10==0):
             cv2.putText(image,str(outputs),(20,20), font, .5,(255,255,255),2,cv2.LINE_AA)
             file_name = f'{args.output_dir}/frame{i}_{outputs["Prediction"]}.jpg'
             print (f'storing file {file_name}')
