@@ -14,36 +14,7 @@ import numpy as np
 import cv2
 import time
 
-
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "..")  # default assume that our export is in this file's parent directory
-
-def gstreamer_pipeline(
-    capture_width=1280,
-    capture_height=720,
-    display_width=1280,
-    display_height=720,
-    framerate=60,
-    flip_method=0,
-):
-    return (
-        "nvarguscamerasrc ! "
-        "video/x-raw(memory:NVMM), "
-        "width=(int)%d, height=(int)%d, "
-        "format=(string)NV12, framerate=(fraction)%d/1 ! "
-        "nvvidconv flip-method=%d ! "
-        "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
-        "videoconvert ! "
-        "video/x-raw, format=(string)BGR ! appsink"
-        % (
-            capture_width,
-            capture_height,
-            framerate,
-            flip_method,
-            display_width,
-            display_height,
-        )
-    )
-
 
 class Model(object):
     def __init__(self, model_dir=MODEL_DIR):
@@ -67,7 +38,6 @@ class Model(object):
     def load(self):
         self.cleanup()
         # create a new tensorflow session
-        #self.session = tf.compat.v1.Session(graph=tf.Graph())
         gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
         self.session = tf.compat.v1.Session(graph=tf.Graph(), config=tf.ConfigProto(gpu_options = gpu_options))
         # load our model into the session
@@ -132,20 +102,19 @@ class Model(object):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Predict labels from csi camera.")
+    parser.add_argument("--rtsp", type=str, dest='rtsp', default='rtsp://guy:qazwsx@192.168.5.242:554//h264Preview_01_main', help="your camera rtsp address.")
     parser.add_argument("--model_dir", type=str, dest='model_dir', default='/data/models/tf/hands', help="your model directory.")
     parser.add_argument("--output_dir", type=str, dest='output_dir', default='/data/output', help="your model directory.")
 
     args = parser.parse_args()
     model = Model(args.model_dir)
-    model.publish({"Prediction":"loading"})
     print("Loading Model")
     model.load()
 
     print("Starting Video Capture")
     #unmark to capture USB camera
     #videoCapture = cv2.VideoCapture(0)
-    print(gstreamer_pipeline(flip_method=0))
-    videoCapture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
+    videoCapture = cv2.VideoCapture(args.rtsp, cv2.CAP_GSTREAMER)
 
     i = 0
     font = cv2.FONT_HERSHEY_SIMPLEX
